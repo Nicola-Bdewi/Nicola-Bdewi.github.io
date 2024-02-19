@@ -40,8 +40,10 @@ The increasing demand for mental health applications among the elderly emphasize
 
 
 Personas (Nicola making sure of the requirements): 
-
+<img width = 50px>
 ![Untitled-Project (3)](https://github.com/Nicola-Bdewi/Nicola-Bdewi.github.io/assets/74018961/ced26ee2-d989-4e3c-a014-24a48abdd45e)
+</img>
+
 
 
 
