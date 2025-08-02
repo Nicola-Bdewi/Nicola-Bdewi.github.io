@@ -83,7 +83,7 @@
 
         .montreal-map {
             position: absolute;
-            top: 30px;
+            top: 80px;
             right: 30px;
             width: 120px;
             height: 120px;
@@ -121,6 +121,10 @@
             font-weight: 600;
             transition: all 0.3s ease;
             z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
 
         .back-btn:hover {
@@ -444,18 +448,18 @@
 
         /* Language-specific content */
         [data-lang="fr"] {
-            display: none;
+            display: block;
         }
 
         [data-lang="en"] {
+            display: none;
+        }
+
+        body[data-current-lang="en"] [data-lang="en"] {
             display: block;
         }
 
-        body[data-current-lang="fr"] [data-lang="fr"] {
-            display: block;
-        }
-
-        body[data-current-lang="fr"] [data-lang="en"] {
+        body[data-current-lang="en"] [data-lang="fr"] {
             display: none;
         }
 
@@ -488,11 +492,11 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body data-current-lang="en">
+    <body data-current-lang="fr">
     <!-- Language Switcher -->
     <div class="language-switcher">
-        <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn active" onclick="switchLanguage('fr')">FR</button>
     </div>
 
     <!-- Back Button -->
