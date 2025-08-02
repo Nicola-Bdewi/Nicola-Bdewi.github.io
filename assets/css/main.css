@@ -361,17 +361,29 @@ body {
     justify-content: center;
 }
 
-.image-placeholder {
+.profile-image {
     width: 300px;
     height: 300px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    color: white;
+    overflow: hidden;
     box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(59, 130, 246, 0.4);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.profile-image:hover img {
+    transform: scale(1.05);
 }
 
 /* Skills Section */
@@ -822,84 +834,6 @@ body {
     color: #1d4ed8;
 }
 
-/* Contact Section */
-.contact {
-    padding: 100px 0;
-    background: #f8fafc;
-}
-
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.contact-item i {
-    font-size: 1.5rem;
-    color: #3b82f6;
-    width: 40px;
-    text-align: center;
-}
-
-.contact-item h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    color: #1a1a1a;
-}
-
-.contact-item p {
-    color: #6b7280;
-    font-weight: 500;
-}
-
-.contact-social h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #1a1a1a;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: #3b82f6;
-    color: white;
-    border-radius: 16px;
-    text-decoration: none;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-}
-
-.social-link:hover {
-    background: #2563eb;
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-}
-
 /* Footer */
 .footer {
     background: #1a1a1a;
@@ -932,10 +866,6 @@ body {
     }
     
     .project-card.featured {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-content {
         grid-template-columns: 1fr;
     }
     
