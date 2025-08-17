@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step Management Class - Technical Details | Nicola Bdewi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(74, 124, 89, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(44, 85, 48, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c5530 0%, #4a7c59 50%, #6b8e23 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        /* Content Section */
+        .content {
+            padding: 80px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: #4a7c59;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-description {
+            color: #4b5563;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            background: #f0f8f0;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(74, 124, 89, 0.2);
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: #4a7c59;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h4 {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-content p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Single column layout for smaller content */
+        .single-column {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .back-btn {
+                top: 20px;
+                left: 20px;
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Portfolio
+    </a>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Step Management Class</h1>
+            <p class="hero-subtitle">Technical Implementation at Agile Creative Labs</p>
+            <p class="hero-description">
+                Exploring the architectural design pattern that abstracts step management complexity 
+                from the main controller, improving code organization and maintainability.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Technical Overview Card -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        Technical Overview
+                    </h2>
+                    <p class="card-description">
+                        This class is designed to abstract the complexity of step management from the
+                        <code>AdvController</code>. By centralizing all step-related DOM manipulation,
+                        database interaction, and business logic, it improves code organization,
+                        separation of concerns, and maintainability.
+                    </p>
+                    <ul class="benefits-list">
+                        <li class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h4>Separation of Concerns</h4>
+                                <p>Isolates step management logic from the main controller, making the codebase more modular and easier to understand.</p>
+                            </div>
+                        </li>
+                        <li class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h4>Improved Maintainability</h4>
+                                <p>Changes to step logic can be made in one place without affecting other parts of the application.</p>
+                            </div>
+                        </li>
+                        <li class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-recycle"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h4>Code Reusability</h4>
+                                <p>The step management class can be reused across different parts of the application or in future projects.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Visual Implementation Card -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        Implementation Details
+                    </h2>
+                    <p class="card-description">
+                        The step management class handles the creation, updating, and lifecycle management 
+                        of steps within the mobile application. This architectural approach ensures clean 
+                        code and better testing capabilities.
+                    </p>
+                    
+                    <div class="image-container">
+                        <img src="assets/images/create-step.png" alt="Step Management Implementation" />
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Key Responsibilities:</h4>
+                        <ul style="list-style: none; color: #4b5563;">
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                DOM manipulation for step creation and updates
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                Database interactions for step persistence
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                Business logic validation and processing
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                Event handling and state management
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Nicola Bdewi. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

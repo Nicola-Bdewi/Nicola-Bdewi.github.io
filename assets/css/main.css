@@ -543,6 +543,32 @@ body {
     font-size: 1.2rem;
 }
 
+.timeline-actions {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.timeline-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #4a7c59;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-btn:hover {
+    background: #2c5530;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+}
+
 /* Education Section */
 .education {
     padding: 100px 0;
