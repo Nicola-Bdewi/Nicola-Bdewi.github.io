@@ -295,6 +295,87 @@
                     <div class="image-container">
                         <img src="assets/images/database.png" alt="Database Implementation" />
                     </div>
+
+                    <!-- Database Schema Details -->
+                    <div style="margin-top: 2rem;">
+                        <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Database Schema and Relationships:</h4>
+                        <p style="color: #4b5563; line-height: 1.6; margin-bottom: 1.5rem;">
+                            The system uses a well-structured relational database with several interconnected tables 
+                            to manage adventures, steps, videos, and thumbnails efficiently.
+                        </p>
+
+                        <div class="content-grid" style="margin-top: 1.5rem;">
+                            <div>
+                                <h5 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Core Tables:</h5>
+                                <ul style="list-style: none; color: #4b5563;">
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        <strong>adventures</strong> - Contains main adventure records
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        <strong>steps</strong> - Individual steps within adventures (up to 7 per adventure)
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        <strong>videos</strong> - Video files and metadata
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        <strong>step_videos</strong> - Junction table connecting steps to videos (many-to-many relationship)
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        <strong>thumbnails</strong> - Thumbnail images linked to videos
+                                    </li>
+                                </ul>
+
+                                <h5 style="color: #1a1a1a; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600;">Key Relationships:</h5>
+                                <ul style="list-style: none; color: #4b5563;">
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        Adventures have a one-to-many relationship with steps
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        Steps connect to videos through the step_videos junction table, allowing multiple video clips per step with ordering
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                        Each video has a one-to-one relationship with a thumbnail
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Thumbnail Generation:</h5>
+                                <p style="color: #4b5563; line-height: 1.6; margin-bottom: 1rem;">
+                                    When a video recording stops, the system automatically generates a thumbnail by:
+                                </p>
+                                <ul style="list-style: none; color: #4b5563;">
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">1.</span>
+                                        Taking a frame capture from the video at a smart-calculated time (default 1 second)
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">2.</span>
+                                        Using intelligent seek time calculation that adapts to video duration
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">3.</span>
+                                        Resizing the captured frame to 1/4 of the original dimensions for optimal storage
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">4.</span>
+                                        Converting the frame to a JPEG format with 80% quality
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">5.</span>
+                                        Storing the thumbnail as a base64-encoded data URL in the database
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -363,92 +444,6 @@
                     
                     <div class="image-container" style="margin-top: 2rem;">
                         <img src="assets/images/wrapper-function.png" alt="Wrapper Function Pattern" />
-                    </div>
-                </div>
-
-                <!-- Database Schema Section -->
-                <div class="card" style="margin-top: 2rem;">
-                    <h2 class="card-title">
-                        <div class="card-icon">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
-                        Database Schema and Relationships
-                    </h2>
-                    <p class="card-description">
-                        The system uses a well-structured relational database with several interconnected tables 
-                        to manage adventures, steps, videos, and thumbnails efficiently.
-                    </p>
-
-                    <div class="content-grid" style="margin-top: 2rem;">
-                        <div>
-                            <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Core Tables:</h4>
-                            <ul style="list-style: none; color: #4b5563;">
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    <strong>adventures</strong> - Contains main adventure records
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    <strong>steps</strong> - Individual steps within adventures (up to 7 per adventure)
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    <strong>videos</strong> - Video files and metadata
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    <strong>step_videos</strong> - Junction table connecting steps to videos (many-to-many relationship)
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    <strong>thumbnails</strong> - Thumbnail images linked to videos
-                                </li>
-                            </ul>
-
-                            <h4 style="color: #1a1a1a; margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600;">Key Relationships:</h4>
-                            <ul style="list-style: none; color: #4b5563;">
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    Adventures have a one-to-many relationship with steps
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    Steps connect to videos through the step_videos junction table, allowing multiple video clips per step with ordering
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                    Each video has a one-to-one relationship with a thumbnail
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Thumbnail Generation:</h4>
-                            <p style="color: #4b5563; line-height: 1.6; margin-bottom: 1rem;">
-                                When a video recording stops, the system automatically generates a thumbnail by:
-                            </p>
-                            <ul style="list-style: none; color: #4b5563;">
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">1.</span>
-                                    Taking a frame capture from the video at a smart-calculated time (default 1 second)
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">2.</span>
-                                    Using intelligent seek time calculation that adapts to video duration
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">3.</span>
-                                    Resizing the captured frame to 1/4 of the original dimensions for optimal storage
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">4.</span>
-                                    Converting the frame to a JPEG format with 80% quality
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">5.</span>
-                                    Storing the thumbnail as a base64-encoded data URL in the database
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
