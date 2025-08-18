@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step Management Class - Technical Details | Nicola Bdewi</title>
+    <title>Technical Implementation - Agile Creative Labs | Nicola Bdewi</title>
     <style>
         * {
             margin: 0;
@@ -267,8 +267,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Step Management Class</h1>
-            <p class="hero-subtitle">Technical Implementation at Agile Creative Labs</p>
+            <h1 class="hero-title">Technical Implementation</h1>
+            <p class="hero-subtitle">An example of Technical Implementation at Agile Creative Labs</p>
             <p class="hero-description">
                 Exploring the architectural design pattern that abstracts step management complexity 
                 from the main controller, improving code organization and maintainability.
@@ -289,10 +289,10 @@
                         Technical Overview
                     </h2>
                     <p class="card-description">
-                        This class is designed to abstract the complexity of step management from the
-                        <code>AdvController</code>. By centralizing all step-related DOM manipulation,
-                        database interaction, and business logic, it improves code organization,
-                        separation of concerns, and maintainability.
+                        The StepManager class abstracts step management complexity from the main controller.
+                        The <code>setupStepAddition()</code> method handles click event listeners for "Add Step" buttons,
+                        form validation for new adventures, step limits (max 7 steps), DOM element creation,
+                        and database integration - improving code organization and maintainability.
                     </p>
                     <ul class="benefits-list">
                         <li class="benefit-item">
@@ -334,35 +334,108 @@
                         Implementation Details
                     </h2>
                     <p class="card-description">
-                        The step management class handles the creation, updating, and lifecycle management 
-                        of steps within the mobile application. This architectural approach ensures clean 
-                        code and better testing capabilities.
+                        The StepManager includes key methods like <code>setupStepAddition()</code> for handling 
+                        step creation workflow and <code>refreshStepsForAdventure()</code> for maintaining 
+                        step state consistency across different pages.
                     </p>
                     
                     <div class="image-container">
-                        <img src="assets/images/create-step.png" alt="Step Management Implementation" />
+                        <img src="assets/images/create-step.png" alt="Step Creation Implementation" />
                     </div>
 
                     <div style="margin-top: 2rem;">
-                        <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Key Responsibilities:</h4>
+                        <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">setupStepAddition() Method:</h4>
                         <ul style="list-style: none; color: #4b5563;">
                             <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
                                 <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                DOM manipulation for step creation and updates
+                                Sets up click event listeners for "Add Step" buttons
                             </li>
                             <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
                                 <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                Database interactions for step persistence
+                                Handles form validation for new adventures
                             </li>
                             <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
                                 <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                Business logic validation and processing
+                                Manages step limits (max 7 steps)
                             </li>
                             <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
                                 <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
-                                Event handling and state management
+                                Creates step elements in the DOM
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">•</span>
+                                Integrates with the database
                             </li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Function Details -->
+            <div class="single-column" style="margin-top: 4rem;">
+                <div class="card">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        refreshStepsForAdventure() Method
+                    </h2>
+                    <p class="card-description">
+                        This method handles the refresh workflow for steps within an adventure, ensuring 
+                        consistency across different pages (new adventure vs. edit adventure) and maintaining 
+                        proper UI state synchronization.
+                    </p>
+
+                    <div class="content-grid" style="margin-top: 2rem;">
+                        <div>
+                            <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Function Flow:</h4>
+                            <ul style="list-style: none; color: #4b5563;">
+                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">1.</span>
+                                    Determines current page context (new vs. edit adventure)
+                                </li>
+                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">2.</span>
+                                    Renders steps for the specific adventure and page
+                                </li>
+                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">3.</span>
+                                    Updates step count display based on page type
+                                </li>
+                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">4.</span>
+                                    Refreshes step UI to show blue buttons for steps with videos
+                                </li>
+                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">5.</span>
+                                    Includes comprehensive error handling and logging
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="image-container">
+                                <img src="assets/images/refresh-step.png" alt="Step Refresh Implementation" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wrapper Function Section -->
+                <div class="card" style="margin-top: 2rem;">
+                    <h2 class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        Architectural Pattern
+                    </h2>
+                    <p class="card-description">
+                        The StepManager follows a wrapper function pattern that encapsulates complex operations 
+                        and provides a clean interface for the main controller. This approach enhances code 
+                        maintainability and testability.
+                    </p>
+                    
+                    <div class="image-container" style="margin-top: 2rem;">
+                        <img src="assets/images/wrapper-function.png" alt="Wrapper Function Pattern" />
                     </div>
                 </div>
             </div>
