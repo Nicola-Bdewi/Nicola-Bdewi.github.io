@@ -221,6 +221,59 @@
             margin: 0 auto;
         }
 
+        /* PDF Viewer Styles */
+        .pdf-container {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .pdf-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .pdf-btn {
+            background: #4a7c59;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .pdf-btn:hover {
+            background: #3a6b4a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+        }
+
+        .pdf-btn.secondary {
+            background: #6b7280;
+        }
+
+        .pdf-btn.secondary:hover {
+            background: #4b5563;
+        }
+
         /* Footer */
         .footer {
             background: #1a1a1a;
@@ -252,6 +305,15 @@
 
             .card {
                 padding: 2rem;
+            }
+
+            .pdf-container {
+                height: 400px;
+            }
+
+            .pdf-actions {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -373,73 +435,42 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Additional Function Details -->
-            <div class="single-column" style="margin-top: 4rem;">
+                <!-- Final Internship Presentation Card -->
                 <div class="card">
                     <h2 class="card-title">
                         <div class="card-icon">
-                            <i class="fas fa-sync-alt"></i>
+                            <i class="fas fa-presentation"></i>
                         </div>
-                        refreshStepsForAdventure() Method
+                        Final Internship Presentation
                     </h2>
                     <p class="card-description">
-                        This method handles the refresh workflow for steps within an adventure, ensuring 
-                        consistency across different pages (new adventure vs. edit adventure) and maintaining 
-                        proper UI state synchronization.
-                    </p>
-
-                    <div class="content-grid" style="margin-top: 2rem;">
-                        <div>
-                            <h4 style="color: #1a1a1a; margin-bottom: 1rem; font-weight: 600;">Function Flow:</h4>
-                            <ul style="list-style: none; color: #4b5563;">
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">1.</span>
-                                    Determines current page context (new vs. edit adventure)
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">2.</span>
-                                    Renders steps for the specific adventure and page
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">3.</span>
-                                    Updates step count display based on page type
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">4.</span>
-                                    Refreshes step UI to show blue buttons for steps with videos
-                                </li>
-                                <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
-                                    <span style="position: absolute; left: 0; color: #4a7c59; font-weight: bold;">5.</span>
-                                    Includes comprehensive error handling and logging
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div class="image-container">
-                                <img src="assets/images/refresh-step.png" alt="Step Refresh Implementation" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wrapper Function Section -->
-                <div class="card" style="margin-top: 2rem;">
-                    <h2 class="card-title">
-                        <div class="card-icon">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        Architectural Pattern
-                    </h2>
-                    <p class="card-description">
-                        The StepManager follows a wrapper function pattern that encapsulates complex operations 
-                        and provides a clean interface for the main controller. This approach enhances code 
-                        maintainability and testability.
+                        My final presentation highlighting key contributions during the internship, including 
+                        designing decision diagrams, implementing video recording features, and refactoring 
+                        a class from a monolithic controller to a separation-of-concerns model.
                     </p>
                     
-                    <div class="image-container" style="margin-top: 2rem;">
-                        <img src="assets/images/wrapper-function.png" alt="Wrapper Function Pattern" />
+                    <div class="pdf-container">
+                        <iframe 
+                            class="pdf-viewer" 
+                            src="assets/images/Final_Internship_Presentation.pdf#toolbar=1&navpanes=1&scrollbar=1"
+                            title="Final Internship Presentation">
+                        </iframe>
+                    </div>
+
+                    <div class="pdf-actions">
+                        <a href="assets/images/Final_Internship_Presentation.pdf" 
+                           class="pdf-btn" 
+                           download="Final_Internship_Presentation.pdf">
+                            <i class="fas fa-download"></i>
+                            Download PDF
+                        </a>
+                        <a href="assets/images/Final_Internship_Presentation.pdf" 
+                           class="pdf-btn secondary" 
+                           target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                            Open in New Tab
+                        </a>
                     </div>
                 </div>
             </div>
